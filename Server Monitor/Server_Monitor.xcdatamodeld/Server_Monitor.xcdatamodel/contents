@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14B25" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="SMOBaseService" representedClassName="SMOBaseService" syncable="YES">
+        <attribute name="baseService" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="refreshDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="SMOService" inverseName="baseService" inverseEntity="SMOService" syncable="YES"/>
+    </entity>
+    <entity name="SMOService" representedClassName="SMOService" syncable="YES">
+        <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="idservice" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="periodicity" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="pwLibraries" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="pwParser" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="sfPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="similarity" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="statusAvailable" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusContent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="stRecursive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="swMode" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="alert" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOSoundAlert" inverseName="service" inverseEntity="SMOSoundAlert" syncable="YES"/>
+        <relationship name="baseService" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SMOBaseService" inverseName="service" inverseEntity="SMOBaseService" syncable="YES"/>
+        <relationship name="serviceAccess" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOServiceAccess" inverseName="service" inverseEntity="SMOServiceAccess" syncable="YES"/>
+    </entity>
+    <entity name="SMOServiceAccess" representedClassName="SMOServiceAccess" syncable="YES">
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="security" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOService" inverseName="serviceAccess" inverseEntity="SMOService" syncable="YES"/>
+    </entity>
+    <entity name="SMOServiceAvailability" representedClassName="SMOServiceAvailable" syncable="YES">
+        <attribute name="avgPingService1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="avgPingService2" optional="YES" attributeType="Float" syncable="YES"/>
+        <attribute name="avgPingService3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="datePing" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="pingTime" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="statusAvailable" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOServiceAvailabilityDetail" inverseName="serviceAvailability" inverseEntity="SMOServiceAvailabilityDetail" syncable="YES"/>
+        <relationship name="service" optional="YES" toMany="YES" minCount="3" maxCount="3" deletionRule="Nullify" destinationEntity="SMOServicesAux" syncable="YES"/>
+        <relationship name="serviceIP" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="SMOServiceIP" inverseName="serviceAvailability" inverseEntity="SMOServiceIP" syncable="YES"/>
+    </entity>
+    <entity name="SMOServiceAvailabilityDetail" representedClassName="SMOServiceAvailabilityDetail" syncable="YES">
+        <attribute name="ping" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="serviceAvailability" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOServiceAvailability" inverseName="detail" inverseEntity="SMOServiceAvailability" syncable="YES"/>
+    </entity>
+    <entity name="SMOServiceContent" representedClassName="SMOServiceContent" syncable="YES">
+        <attribute name="monitorDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="serviceDownloaded" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="similarityRate" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="serviceIP" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="SMOServiceIP" inverseName="serviceContent" inverseEntity="SMOServiceIP" syncable="YES"/>
+    </entity>
+    <entity name="SMOServiceIP" representedClassName="SMOServiceIP" syncable="YES">
+        <attribute name="addressIp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avgAvailable" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="perSimilarity" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="statusAvailable" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusSimilarity" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOService" syncable="YES"/>
+        <relationship name="serviceAvailability" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SMOServiceAvailability" inverseName="serviceIP" inverseEntity="SMOServiceAvailability" syncable="YES"/>
+        <relationship name="serviceContent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SMOServiceContent" inverseName="serviceIP" inverseEntity="SMOServiceContent" syncable="YES"/>
+    </entity>
+    <entity name="SMOServicesAux" representedClassName="SMOServicesAux" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="port" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SMOSound" representedClassName="SMOSound" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sound" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SMOSoundAlert" representedClassName="SMOSoundAlert" syncable="YES">
+        <attribute name="alert1050" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="alert5070" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="alert7099" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="ipAlert" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unavailability" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOService" inverseName="alert" inverseEntity="SMOService" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="SMOBaseService" positionX="-29" positionY="371" width="128" height="88"/>
+        <element name="SMOService" positionX="63" positionY="-10" width="128" height="298"/>
+        <element name="SMOServiceAccess" positionX="351" positionY="18" width="128" height="133"/>
+        <element name="SMOServiceAvailability" positionX="-315" positionY="-27" width="128" height="180"/>
+        <element name="SMOServiceAvailabilityDetail" positionX="-315" positionY="-126" width="128" height="88"/>
+        <element name="SMOServiceContent" positionX="-315" positionY="225" width="128" height="103"/>
+        <element name="SMOServiceIP" positionX="-135" positionY="44" width="128" height="165"/>
+        <element name="SMOServicesAux" positionX="-164" positionY="-126" width="128" height="103"/>
+        <element name="SMOSound" positionX="-117" positionY="18" width="128" height="75"/>
+        <element name="SMOSoundAlert" positionX="349" positionY="227" width="128" height="133"/>
+    </elements>
+</model>
