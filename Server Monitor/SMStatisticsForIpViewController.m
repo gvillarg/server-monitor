@@ -13,6 +13,9 @@
 #import "JBLineChartFooterView.h"
 #import "SMWebService.h"
 #import "AFNetworking.h"
+#import "SMOServiceAvailability.h"
+#import "SMAvailabilityViewController.h"
+#import "SMContentTableViewController.h"
 
 #define ARC4RANDOM_MAX 0x100000000
 
@@ -21,9 +24,10 @@ typedef NS_ENUM(NSInteger, JBLineChartLine){
     JBLineChartLineDashed,
     JBLineChartLineCount
 };
-/*CGRectMake(kJBLineChartViewControllerChartPadding, kJBLineChartViewControllerChartPadding, self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeight)*/
-// Numerics
 
+/* CGRectMake(kJBLineChartViewControllerChartPadding, kJBLineChartViewControllerChartPadding, self.view.bounds.size.width - (kJBLineChartViewControllerChartPadding * 2), kJBLineChartViewControllerChartHeight) */
+
+// Numerics
 CGFloat const kJBLineChartViewControllerChartHeight = 250.0f;
 CGFloat const kJBLineChartViewControllerChartPadding = 20.0f;
 CGFloat const kJBLineChartViewControllerChartHeaderHeight = 75.0f;
@@ -35,6 +39,7 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 @interface SMStatisticsForIpViewController() <JBLineChartViewDelegate, JBLineChartViewDataSource>{
     NSMutableDictionary *datos;
+    NSMutableArray *availabilityArray;
 }
 
 @property (nonatomic, strong) JBLineChartView *lineChartView;
@@ -57,6 +62,13 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Disponibilidad", @"Contenido"]];
     self.segmentedControl.selectedSegmentIndex = 0;
     self.navigationItem.titleView = self.segmentedControl;
+    
+    [self.segmentedControl addTarget:self
+                         action:@selector(controlValueChanged:)
+               forControlEvents:UIControlEventValueChanged];
+    
+    
+    
     self.navigationController.navigationBar.topItem.title = @" ";
     self.navigationItem.prompt = self.serviceIP.addressIp;
     NSArray *monitoreo = [self.serviceIP.serviceContent allObjects];
@@ -65,9 +77,16 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
         SMOServiceContent *content = monitoreo[i];
         [datos setObject:content.similarityRate forKey:content.monitorDate];
     }
-    [self initFakeData];
     [self loadServiceVerify];
 }
+
+//The event handling method
+- (void)controlValueChanged:(id)sender {
+    //Do stuff here...
+        [self initFakeData];
+        [self.tableView reloadData];
+}
+
 
 // Services
 -(void) loadServiceVerify {
@@ -83,9 +102,10 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, NSMutableArray *responseObject) {
         
-        NSLog(@"%@", responseObject);        
+        NSLog(@"%@", responseObject);
+        availabilityArray = [SMOServiceAvailability parseArray:responseObject];
         [self.tableView reloadData];
-        
+        [self initFakeData];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -150,17 +170,14 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     {
         NSMutableArray *mutableChartData = [NSMutableArray array];
         
-        llaves = [datos allKeys];
-        llaves = [llaves sortedArrayUsingComparator:
-                                ^(id obj1, id obj2)
-                                {
-                                    return [(NSDate*) obj2 compare: (NSDate*)obj1];
-                                }
-                                ];
         for (int i=0; i<kJBLineChartViewControllerMaxNumChartPoints; i++)
         {
-            if (i<datos.count){
-                [mutableChartData addObject:[datos objectForKey:llaves[i]]]; // random number between 0 and 1
+            if (i<availabilityArray.count){
+                SMOServiceAvailability *serviceavailability = availabilityArray[i];
+                if(self.segmentedControl.selectedSegmentIndex == 0)
+                    [mutableChartData addObject:serviceavailability.pingTime];
+                else
+                    [mutableChartData addObject:serviceavailability.similarityRate];
             }else{
                 [mutableChartData addObject:[NSNumber numberWithInt:0]];
             }
@@ -271,8 +288,9 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm"];
     NSString *fecha;
-    if (horizontalIndex < datos.count) {
-        fecha = [formatter stringFromDate:[self.daysOfWeek objectAtIndex:horizontalIndex]];
+    if (horizontalIndex < availabilityArray.count) {
+        SMOServiceAvailability *sa = availabilityArray[horizontalIndex];
+        fecha = [formatter stringFromDate:sa.datePing];
     }else fecha = @"-";
     [self.tooltipView setText:fecha];
 }
@@ -331,7 +349,7 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return datos.count;
+        return availabilityArray.count;
     }else
         return 0;
     
@@ -344,22 +362,17 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
     
     UITableViewCell *serviceCell =
     (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-    NSArray *llaves = [datos allKeys];
-    llaves = [llaves sortedArrayUsingComparator:
-              ^(id obj1, id obj2)
-              {
-                  return [(NSDate*) obj2 compare: (NSDate*)obj1];
-              }
-              ];
-
-    NSDate *key = llaves[indexPath.row];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd/MM/yyyy HH:mm:ss"];
-    NSString *fecha = [formatter stringFromDate:key];
-    float rate = [[datos objectForKey:key] floatValue];
-    rate*=100;
-    serviceCell.textLabel.text = fecha;
-    serviceCell.detailTextLabel.text = [NSString stringWithFormat:@"%f%%",rate];
+    
+    SMOServiceAvailability *availability = availabilityArray[indexPath.row];
+    
+    NSDateFormatter *newDateFormatter = [[NSDateFormatter alloc]init];
+    [newDateFormatter setDateFormat:@"MM/dd/yyyy"];
+    serviceCell.textLabel.text = [newDateFormatter stringFromDate:availability.datePing];
+    serviceCell.imageView.image = [UIImage imageNamed:@"warning"];
+    if (_segmentedControl.selectedSegmentIndex == 0)
+        serviceCell.detailTextLabel.text = [NSString stringWithFormat:@"%f", [availability.pingTime doubleValue]];
+    else
+        serviceCell.detailTextLabel.text = [NSString stringWithFormat:@"%f", [availability.similarityRate doubleValue]*100];
     return serviceCell;
 }
 
@@ -380,8 +393,16 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 }
 
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SMOServiceAvailability *availability = availabilityArray[indexPath.row];
+    
+    if (_segmentedControl.selectedSegmentIndex == 0) {
+        [self performSegueWithIdentifier:@"AvailabilitySegue" sender:availability];
+    } else if(_segmentedControl.selectedSegmentIndex == 1) {
+        [self performSegueWithIdentifier:@"ContentSegue" sender:availability];
+    }
+}
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -389,7 +410,19 @@ NSInteger const kJBLineChartViewControllerMaxNumChartPoints = 7;
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString: @"AvailabilitySegue"]) {
+        
+        SMAvailabilityViewController *view = [segue destinationViewController];
+        view.availability = sender;
+        
+    } else if ([segue.identifier isEqualToString: @"ContentSegue"]) {
+        
+        SMContentTableViewController *view = [segue destinationViewController];
+        view.availability = sender;
+        
+    }
+    
 }
-*/
+
 
 @end

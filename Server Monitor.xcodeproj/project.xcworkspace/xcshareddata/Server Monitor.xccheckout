@@ -10,55 +10,31 @@
 	<string>Server Monitor</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2EFE4B3E-0EE4-4BD0-BCE6-0F0EBBFD20FF</key>
-		<string>ssh://github.com/cesitar09/Tesis.git</string>
-		<key>54471222-194E-44EC-8F28-84C656945B8C</key>
-		<string>https://github.com/cesitar09/monitorserver.git</string>
-		<key>F203267A-4AB4-4EDC-B5B6-C606815E3303</key>
-		<string>ssh://github.com/cesitar09/Tesis.git</string>
+		<key>44E861237A3C02D8AC99B7220390F7996FA70337</key>
+		<string>https://github.com/gvillarg/server-monitor.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Server Monitor.xcodeproj/project.xcworkspace</string>
+	<string>Server Monitor.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2EFE4B3E-0EE4-4BD0-BCE6-0F0EBBFD20FF</key>
-		<string>../../Server Monitor/Server Monitor</string>
-		<key>54471222-194E-44EC-8F28-84C656945B8C</key>
-		<string>../../Server Monitor/Server Monitor/Server Monitor/Model/monitorserver</string>
-		<key>F203267A-4AB4-4EDC-B5B6-C606815E3303</key>
+		<key>44E861237A3C02D8AC99B7220390F7996FA70337</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/cesitar09/Tesis.git</string>
+	<string>https://github.com/gvillarg/server-monitor.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>F203267A-4AB4-4EDC-B5B6-C606815E3303</string>
+	<string>44E861237A3C02D8AC99B7220390F7996FA70337</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>54471222-194E-44EC-8F28-84C656945B8C</string>
+			<string>44E861237A3C02D8AC99B7220390F7996FA70337</string>
 			<key>IDESourceControlWCCName</key>
-			<string>monitorserver</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F203267A-4AB4-4EDC-B5B6-C606815E3303</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Server Monitor</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2EFE4B3E-0EE4-4BD0-BCE6-0F0EBBFD20FF</string>
-			<key>IDESourceControlWCCName</key>
-			<string>Server Monitor</string>
+			<string>Server%20Monitor</string>
 		</dict>
 	</array>
 </dict>

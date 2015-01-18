@@ -17,10 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _soundAlert = [SMOSoundAlert create];
     _soundAlert.ipAlert = 0;
     [[IBCoreDataStore mainStore] save];
-    NSArray *alerts = [SMOSoundAlert allOrderedBy:@"ipSound" ascending:YES];
+    NSArray *alerts = [SMOSound all];
     _soundAlert = alerts[0];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -48,7 +47,7 @@
     }else if(section == 1){
         return 2;
     }else{
-        return 4;
+        return 2;
     }
 }
 
@@ -100,35 +99,35 @@
         if (indexPath.row == 0) {
             UITableViewCell *serviceCell =
             (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-            serviceCell.textLabel.text = @"Menor a 10%";
-            if (_soundAlert.unavailability) {
-                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.unavailability).name;
+            serviceCell.textLabel.text = @"Servicio no disponible";
+            if ([SMOSound unavailableSound]) {
+                serviceCell.detailTextLabel.text = [SMOSound unavailableSound].name;
             }
             return serviceCell;
         }else if(indexPath.row == 1){
             UITableViewCell *serviceCell =
             (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-            serviceCell.textLabel.text = @"Entre 10% y 50%";
-            if (_soundAlert.alert1050) {
-                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.alert1050).name;
+            serviceCell.textLabel.text = @"Contenido modificado";
+            if ([SMOSound changedSound]) {
+                serviceCell.detailTextLabel.text = [SMOSound changedSound].name;
             }
             return serviceCell;
-        }else if(indexPath.row == 2){
-            UITableViewCell *serviceCell =
-            (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-            serviceCell.textLabel.text = @"Entre 50% y 70%";
-            if (_soundAlert.alert5070) {
-                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.alert5070).name;
-            }
-            return serviceCell;
-        }else{
-            UITableViewCell *serviceCell =
-            (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
-            serviceCell.textLabel.text = @"Entre 70% y 99%";
-            if (_soundAlert.alert7099) {
-                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.alert7099).name;
-            }
-            return serviceCell;
+//        }else if(indexPath.row == 2){
+//            UITableViewCell *serviceCell =
+//            (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+//            serviceCell.textLabel.text = @"Entre 50% y 70%";
+//            if (_soundAlert.alert5070) {
+//                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.alert5070).name;
+//            }
+//            return serviceCell;
+//        }else{
+//            UITableViewCell *serviceCell =
+//            (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+//            serviceCell.textLabel.text = @"Entre 70% y 99%";
+//            if (_soundAlert.alert7099) {
+//                serviceCell.detailTextLabel.text = ((SMOSound *)_soundAlert.alert7099).name;
+//            }
+//            return serviceCell;
         }//CellCrearAlerta
     }
     return NULL;
@@ -144,22 +143,18 @@
 
 #pragma mark - SMSoundAlertsDelegate
 
-- (void) SMSoundAlertsDelegate:(SMSoundAlertsTableViewController *)SMSoundAlertsTableViewController didAddService:(SMOSound *)sound selectedCell:(int)selectedCell{
+- (void) SMSoundAlertsDelegate:(SMSoundAlertsTableViewController *)SMSoundAlertsTableViewController didAddService:(SMOSound *)sound selectedCell:(NSInteger)selectedCell{
     switch (selectedCell) {
+        case 0:
+            [sound setAsUnavailableSound];
+            break;
         case 1:
-            _soundAlert.unavailability = sound;
-            break;
-        case 2:
-            _soundAlert.alert1050 = sound;
-            break;
-        case 3:
-            _soundAlert.alert5070 = sound;
-            break;
-        default:
-            _soundAlert.alert7099 = sound;
+            [sound setAsChangedSound];
             break;
     }
-    [[IBCoreDataStore mainStore] save];
+//    [[IBCoreDataStore mainStore] save];
+    
+    [self.navigationController popViewControllerAnimated:YES];
     [self.tableView reloadData];
 }
 
@@ -226,15 +221,7 @@
         soundAlerts.delegate = self;
         NSIndexPath *index = [self.tableView indexPathForSelectedRow];
         if (index.section == 2) {
-            if (index.row == 0) {
-                soundAlerts.selectedCell = 1;
-            }else if (index.row == 1){
-                soundAlerts.selectedCell = 2;
-            }else if (index.row == 2){
-                soundAlerts.selectedCell = 3;
-            }else{
-                soundAlerts.selectedCell = 4;
-            }
+            soundAlerts.selectedCell = index.row;
         }
     }
 }

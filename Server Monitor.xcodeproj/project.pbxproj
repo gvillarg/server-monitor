@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC553DE41A6AFC700047BB81 /* SMAvailabilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC553DE31A6AFC700047BB81 /* SMAvailabilityViewController.m */; };
+		CC553DE71A6B03790047BB81 /* SMContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CC553DE61A6B03790047BB81 /* SMContentTableViewController.m */; };
+		CC553DEA1A6B03920047BB81 /* SMContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CC553DE91A6B03920047BB81 /* SMContentTableViewCell.m */; };
 		CC803EA61A5A16F2009754BC /* SMWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = CC803EA51A5A16F2009754BC /* SMWebService.m */; };
 		CC89ACB41A5F640C00352993 /* JsonDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = CC89ACB31A5F640C00352993 /* JsonDictionary.m */; };
 		DB2A588B19D085BA00EACA99 /* SMServiceSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB2A588A19D085BA00EACA99 /* SMServiceSettingTableViewController.m */; };
@@ -45,7 +48,7 @@
 		DB9366C119F89C7900FAB96D /* SMOBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366C019F89C7900FAB96D /* SMOBaseService.m */; };
 		DB9366C419F89C7900FAB96D /* SMOServicesAux.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366C319F89C7900FAB96D /* SMOServicesAux.m */; };
 		DB9366C719F89C7900FAB96D /* SMOSoundAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366C619F89C7900FAB96D /* SMOSoundAlert.m */; };
-		DB9366CA19F89C7900FAB96D /* SMOServiceAvailable.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366C919F89C7900FAB96D /* SMOServiceAvailable.m */; };
+		DB9366CA19F89C7900FAB96D /* SMOServiceAvailability.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366C919F89C7900FAB96D /* SMOServiceAvailability.m */; };
 		DB9366D619F8A44700FAB96D /* SMOServiceAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366D519F8A44700FAB96D /* SMOServiceAccess.m */; };
 		DB9366DC19F8AFD800FAB96D /* SMGeneralSettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366DB19F8AFD800FAB96D /* SMGeneralSettingTableViewController.m */; };
 		DB9366DF19FD4A1100FAB96D /* SMAuxServicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9366DE19FD4A1100FAB96D /* SMAuxServicesTableViewController.m */; };
@@ -124,6 +127,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC553DE21A6AFC700047BB81 /* SMAvailabilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAvailabilityViewController.h; sourceTree = "<group>"; };
+		CC553DE31A6AFC700047BB81 /* SMAvailabilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMAvailabilityViewController.m; sourceTree = "<group>"; };
+		CC553DE51A6B03790047BB81 /* SMContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMContentTableViewController.h; sourceTree = "<group>"; };
+		CC553DE61A6B03790047BB81 /* SMContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMContentTableViewController.m; sourceTree = "<group>"; };
+		CC553DE81A6B03920047BB81 /* SMContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMContentTableViewCell.h; sourceTree = "<group>"; };
+		CC553DE91A6B03920047BB81 /* SMContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMContentTableViewCell.m; sourceTree = "<group>"; };
 		CC803EA41A5A16F2009754BC /* SMWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMWebService.h; path = Model/WebServices/SMWebService.h; sourceTree = "<group>"; };
 		CC803EA51A5A16F2009754BC /* SMWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMWebService.m; path = Model/WebServices/SMWebService.m; sourceTree = "<group>"; };
 		CC89ACB21A5F640C00352993 /* JsonDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonDictionary.h; sourceTree = "<group>"; };
@@ -188,8 +197,8 @@
 		DB9366C319F89C7900FAB96D /* SMOServicesAux.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMOServicesAux.m; path = Model/SMOServicesAux.m; sourceTree = "<group>"; };
 		DB9366C519F89C7900FAB96D /* SMOSoundAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMOSoundAlert.h; path = Model/SMOSoundAlert.h; sourceTree = "<group>"; };
 		DB9366C619F89C7900FAB96D /* SMOSoundAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMOSoundAlert.m; path = Model/SMOSoundAlert.m; sourceTree = "<group>"; };
-		DB9366C819F89C7900FAB96D /* SMOServiceAvailable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMOServiceAvailable.h; path = Model/SMOServiceAvailable.h; sourceTree = "<group>"; };
-		DB9366C919F89C7900FAB96D /* SMOServiceAvailable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMOServiceAvailable.m; path = Model/SMOServiceAvailable.m; sourceTree = "<group>"; };
+		DB9366C819F89C7900FAB96D /* SMOServiceAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMOServiceAvailability.h; path = Model/SMOServiceAvailability.h; sourceTree = "<group>"; };
+		DB9366C919F89C7900FAB96D /* SMOServiceAvailability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMOServiceAvailability.m; path = Model/SMOServiceAvailability.m; sourceTree = "<group>"; };
 		DB9366D419F8A44700FAB96D /* SMOServiceAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SMOServiceAccess.h; path = Model/SMOServiceAccess.h; sourceTree = "<group>"; };
 		DB9366D519F8A44700FAB96D /* SMOServiceAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SMOServiceAccess.m; path = Model/SMOServiceAccess.m; sourceTree = "<group>"; };
 		DB9366DA19F8AFD800FAB96D /* SMGeneralSettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMGeneralSettingTableViewController.h; sourceTree = "<group>"; };
@@ -502,8 +511,8 @@
 				DBD6772B19FDF97B00BEA94E /* SMOSound.m */,
 				DB9366D419F8A44700FAB96D /* SMOServiceAccess.h */,
 				DB9366D519F8A44700FAB96D /* SMOServiceAccess.m */,
-				DB9366C819F89C7900FAB96D /* SMOServiceAvailable.h */,
-				DB9366C919F89C7900FAB96D /* SMOServiceAvailable.m */,
+				DB9366C819F89C7900FAB96D /* SMOServiceAvailability.h */,
+				DB9366C919F89C7900FAB96D /* SMOServiceAvailability.m */,
 				DB9366C519F89C7900FAB96D /* SMOSoundAlert.h */,
 				DB9366C619F89C7900FAB96D /* SMOSoundAlert.m */,
 				DB9366C219F89C7900FAB96D /* SMOServicesAux.h */,
@@ -587,6 +596,12 @@
 				DBDE8AF019D0F1BB00E2434D /* SMServicesIPTableViewController.m */,
 				DBD0EDF419D1E97600809379 /* SMStatisticsForIpViewController.h */,
 				DBD0EDF519D1E97600809379 /* SMStatisticsForIpViewController.m */,
+				CC553DE21A6AFC700047BB81 /* SMAvailabilityViewController.h */,
+				CC553DE31A6AFC700047BB81 /* SMAvailabilityViewController.m */,
+				CC553DE51A6B03790047BB81 /* SMContentTableViewController.h */,
+				CC553DE61A6B03790047BB81 /* SMContentTableViewController.m */,
+				CC553DE81A6B03920047BB81 /* SMContentTableViewCell.h */,
+				CC553DE91A6B03920047BB81 /* SMContentTableViewCell.m */,
 			);
 			name = Statistics;
 			sourceTree = "<group>";
@@ -847,9 +862,10 @@
 				ORGANIZATIONNAME = PUCP;
 				TargetAttributes = {
 					DB8704E819C68995009E3BD8 = {
+						DevelopmentTeam = J4Z52BA584;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -918,10 +934,13 @@
 				DB9366C419F89C7900FAB96D /* SMOServicesAux.m in Sources */,
 				DBD0AB0519D2743600C722F8 /* JBBaseChartViewController.m in Sources */,
 				DBDE89B419D0B24000E2434D /* IBTargetAction.m in Sources */,
+				CC553DEA1A6B03920047BB81 /* SMContentTableViewCell.m in Sources */,
 				DBDE89AA19D0B24000E2434D /* IBFunctions.m in Sources */,
 				DBDE89AC19D0B24000E2434D /* IBCoreDataStore.m in Sources */,
+				CC553DE71A6B03790047BB81 /* SMContentTableViewController.m in Sources */,
 				DBC8CA0A19D063DE008F93C1 /* SMStatisticsTableViewController.m in Sources */,
 				DB9366EB19FD797900FAB96D /* SMSoundAlertsTableViewController.m in Sources */,
+				CC553DE41A6AFC700047BB81 /* SMAvailabilityViewController.m in Sources */,
 				DB87050219C68995009E3BD8 /* Server_Monitor.xcdatamodeld in Sources */,
 				DBDE899B19D0B24000E2434D /* IBCoreTextLabel.m in Sources */,
 				DB970BC91A0B439300CF2141 /* AFHTTPSessionManager.m in Sources */,
@@ -963,7 +982,7 @@
 				DB970BCE1A0B439300CF2141 /* AFURLResponseSerialization.m in Sources */,
 				DB5898151A15919200469A45 /* UIProgressView+AFNetworking.m in Sources */,
 				DBA135FF1A198EEB0038C8B5 /* WhiteRaccoon.m in Sources */,
-				DB9366CA19F89C7900FAB96D /* SMOServiceAvailable.m in Sources */,
+				DB9366CA19F89C7900FAB96D /* SMOServiceAvailability.m in Sources */,
 				DB5898161A15919200469A45 /* UIWebView+AFNetworking.m in Sources */,
 				DBD0AAE919D26A7700C722F8 /* JBChartHeaderView.m in Sources */,
 				DBDE89B119D0B24000E2434D /* IBDispatchMessage.m in Sources */,
@@ -1110,6 +1129,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.tesis.Server-Monitor";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.tesis.Server-Monitor";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Server Monitor/Server Monitor-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1118,6 +1139,7 @@
 				);
 				INFOPLIST_FILE = "Server Monitor/Server Monitor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d7fb04e8-273b-4624-a555-9fa426690954";
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1128,6 +1150,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.tesis.Server-Monitor";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.tesis.Server-Monitor";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Server Monitor/Server Monitor-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1136,6 +1160,7 @@
 				);
 				INFOPLIST_FILE = "Server Monitor/Server Monitor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d7fb04e8-273b-4624-a555-9fa426690954";
 				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};

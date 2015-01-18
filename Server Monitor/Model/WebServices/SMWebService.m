@@ -9,5 +9,5 @@
 #import "SMWebService.h"
 
 @implementation SMWebService
-NSString * const URL_STRING = @"http://190.232.8.115:8080/api";
+NSString * const URL_STRING = @"http://192.168.1.13/api";
 @end

@@ -32,7 +32,7 @@
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="service" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SMOService" inverseName="serviceAccess" inverseEntity="SMOService" syncable="YES"/>
     </entity>
-    <entity name="SMOServiceAvailability" representedClassName="SMOServiceAvailable" syncable="YES">
+    <entity name="SMOServiceAvailability" representedClassName="SMOServiceAvailability" syncable="YES">
         <attribute name="avgPingService1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="avgPingService2" optional="YES" attributeType="Float" syncable="YES"/>
         <attribute name="avgPingService3" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -86,12 +86,12 @@
         <element name="SMOBaseService" positionX="-29" positionY="371" width="128" height="88"/>
         <element name="SMOService" positionX="63" positionY="-10" width="128" height="298"/>
         <element name="SMOServiceAccess" positionX="351" positionY="18" width="128" height="133"/>
-        <element name="SMOServiceAvailability" positionX="-315" positionY="-27" width="128" height="180"/>
+        <element name="SMOServiceAvailability" positionX="-315" positionY="-27" width="128" height="178"/>
         <element name="SMOServiceAvailabilityDetail" positionX="-315" positionY="-126" width="128" height="88"/>
         <element name="SMOServiceContent" positionX="-315" positionY="225" width="128" height="103"/>
         <element name="SMOServiceIP" positionX="-135" positionY="44" width="128" height="165"/>
         <element name="SMOServicesAux" positionX="-164" positionY="-126" width="128" height="103"/>
-        <element name="SMOSound" positionX="-117" positionY="18" width="128" height="75"/>
+        <element name="SMOSound" positionX="133" positionY="-108" width="128" height="75"/>
         <element name="SMOSoundAlert" positionX="349" positionY="227" width="128" height="133"/>
     </elements>
 </model>

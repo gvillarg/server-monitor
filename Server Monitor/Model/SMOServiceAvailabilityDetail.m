@@ -7,7 +7,7 @@
 //
 
 #import "SMOServiceAvailabilityDetail.h"
-#import "SMOServiceAvailable.h"
+#import "SMOServiceAvailability.h"
 
 
 @implementation SMOServiceAvailabilityDetail

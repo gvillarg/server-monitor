@@ -17,11 +17,11 @@
 }
     @property (nonatomic, unsafe_unretained) id <SMSoundAlertsDelegate> delegate;
     @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-    @property int selectedCell;
+    @property NSInteger selectedCell;
 @end
 
 @protocol SMSoundAlertsDelegate <NSObject>
 
-- (void)SMSoundAlertsDelegate:(SMSoundAlertsTableViewController *)SMSoundAlertsTableViewController didAddService:(SMOSound *)sound selectedCell: (int) selectedCell;
+- (void)SMSoundAlertsDelegate:(SMSoundAlertsTableViewController *)SMSoundAlertsTableViewController didAddService:(SMOSound *)sound selectedCell: (NSInteger) selectedCell;
 
 @end

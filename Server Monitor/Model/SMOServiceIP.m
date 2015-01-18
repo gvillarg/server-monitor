@@ -8,7 +8,7 @@
 
 #import "SMOServiceIP.h"
 #import "SMOService.h"
-#import "SMOServiceAvailable.h"
+#import "SMOServiceAvailability.h"
 #import "SMOServiceContent.h"
 #import "SMContext.h"
 

@@ -11,7 +11,7 @@
 #import "SMContext.h"
 
 @interface SMSoundAlertsTableViewController ()
-    @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+    @property (nonatomic, strong) NSArray *sounds;
     @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 
@@ -21,6 +21,8 @@
     [super viewDidLoad];
     _managedObjectContext = [[SMContext sharedCenter] managedObjectContext];
     _selectedIndexPath = [[NSIndexPath alloc] init];
+    _sounds = [SMOSound all];
+    
     /*
     NSError *error1 = nil;
     SMOSound *sound;
@@ -56,17 +58,17 @@
     [self.managedObjectContext save:&error1];
     */
     
-    NSError *error = nil;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    [self.tableView reloadData];
+//    NSError *error = nil;
+//    if (![[self fetchedResultsController] performFetch:&error]) {
+//        /*
+//         Replace this implementation with code to handle the error appropriately.
+//         
+//         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+//         */
+//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//        abort();
+//    }
+//    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,47 +76,47 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if(_fetchedResultsController == nil){
-        // Initialize Fetch Request
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"SMOSound"];
-        
-        // Add Sort Descriptors
-        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-        
-        // Initialize Fetched Results Controller
-        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        
-        // Configure Fetched Results Controller
-        [self.fetchedResultsController setDelegate:self];
-    }
-    return _fetchedResultsController;
-}
+//- (NSFetchedResultsController *)fetchedResultsController
+//{
+//    if(_fetchedResultsController == nil){
+//        // Initialize Fetch Request
+//        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"SMOSound"];
+//        
+//        // Add Sort Descriptors
+//        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+//        
+//        // Initialize Fetched Results Controller
+//        self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//        
+//        // Configure Fetched Results Controller
+//        [self.fetchedResultsController setDelegate:self];
+//    }
+//    return _fetchedResultsController;
+//}
 
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    NSInteger count = [self.fetchedResultsController sections].count;
-    return count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSInteger numberOfRows = 0;
+//    NSInteger numberOfRows = 0;
+//    
+//    if ([self.fetchedResultsController sections].count > 0) {
+//        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+//        numberOfRows = [sectionInfo numberOfObjects];
+//    }
     
-    if ([self.fetchedResultsController sections].count > 0) {
-        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-        numberOfRows = [sectionInfo numberOfObjects];
-    }
-    
-    return numberOfRows;
+    return self.sounds.count;
 }
 
 -(IBAction)save:(id)sender{
-    //[self.delegate didAddService]
+    SMOSound *selectedSound = self.sounds[_selectedIndexPath.row];
+    
+    [self.delegate SMSoundAlertsDelegate:self didAddService:selectedSound selectedCell:self.selectedCell];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,7 +131,7 @@
     } else {
         soundCell.accessoryType = UITableViewCellAccessoryNone;
     }
-    SMOSound *sound = (SMOSound *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    SMOSound *sound = self.sounds[indexPath.row];
     soundCell.textLabel.text = sound.name;
     return soundCell;
 }
@@ -139,13 +141,13 @@
 {
     _selectedIndexPath = indexPath;
     [tableView reloadData];
-    SMOSound *sound = (SMOSound *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    SMOSound *sound = self.sounds[indexPath.row];
     NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:sound.sound, [[NSBundle mainBundle] resourcePath]]];
     NSError *error;
     audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
     audioPlayer.numberOfLoops = 1;
     if (audioPlayer == nil)
-        NSLog([error description]);
+        NSLog(@"%@", [error description]);
     else
         [audioPlayer play];
     
